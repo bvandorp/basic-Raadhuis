@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="nl"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="nl"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="nl"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="nl"> <!--<![endif]-->
+<head>
+
+<meta charset="utf-8">
+<title>Sitenaam</title>
+<meta name="description" content="">
+
+<!--[if lte IE 6]>
+	<script type="text/javascript" src="js/supersleight-min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link href="http://fonts.googleapis.com/css?family=Ubuntu:400,500,700,500italic,400italic,700italic" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="style/base.css" />
+<link rel="stylesheet" href="style/skeleton.css" />
+<link rel="stylesheet" href="style/layout.css" />
+<link rel="stylesheet" href="style/mmenu.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-xxxxxxx-x']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="mobilenav">
+	<div class="container">
+		<div class="sixteen columns">
+		    <a href="#jph-nav" class="menu_btn"></a>
+	    </div>
+    </div>
+</div>
+
+<div class="header">
+	<div class="container">
+		<div class="sixteen columns">
+    		<div id="logo">
+    			<a href="/"><h2>Sitenaam</h2></a>
+			</div>
+            <nav id="jph-nav">
+                <ul>
+                    <li class="first"><a href="#">menu-item 1</a></li>
+                    <li class="active"><a href="#">menu-item 2</a></li>
+                    <li><a href="#">menu-item 3</a></li>
+                    <li><a href="#">menu-item 4</a></li>
+                    <li><a href="#">menu-item 5</a></li>
+                    <li class="last"><a href="#">menu-item 6</a><ul><li><a href="#">submenu-item 1</a></li><li><a href="#">submenu-item 1</a></li></ul></li>
+                </ul>
+            </nav>
+            <div class="clearboth"></div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="container">
+		<div class="sixteen columns">
+    		<h1>Header</h1>
+            <p>Tekst</p>
+            <div class="clearboth"></div>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div class="sixteen columns">
+    		<ul>
+            	<li><a href="http://www.raadhuis.com/?utm_source=Sitenaam&utm_medium=footer&utm_campaign=footerlink" target="_blank">Webdesign: RAADHUIS.com</a></li>
+            </ul>
+            <div class="clearboth"></div>
+		</div>
+	</div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<script src="js/modernizr.js" type="text/javascript"></script>
+
+<!-- SVG backup PNG -->
+<script>
+if(!Modernizr.svg) {
+    $('img[src*="svg"]').attr('src', function() {
+        return $(this).attr('src').replace('.svg', '.png');
+    });
+}
+</script>
+
+<!-- Topnav mobile -->
+<script type="text/javascript" language="javascript"  src="js/jRespond.js"></script>
+<script type="text/javascript" language="javascript"  src="js/jquery.mmenu.js"></script>
+
+<script>
+	$(document).ready(function(){
+		
+		// Topnav mobile
+		var jRes = jRespond([ {
+			label: 'small',
+			enter: 0,
+			exit: 767
+		},{
+			label: 'large',
+			enter: 768,
+			exit: 10000
+		} ]);
+	
+		jRes.addFunc({
+			breakpoint: 'small',
+			enter: function() {
+				init_mmenu();
+			}
+		});
+	
+		jRes.addFunc({
+			breakpoint: 'large',
+			enter: function() {
+				$("#jph-nav").trigger("close");
+			}
+		});
+	
+		function init_mmenu() {	
+			$('#jph-nav').mmenu({
+				slidingSubmenus: true,
+				searchfield : false,
+				
+				configuration: {
+					selectedClass: 'active'
+				}
+			});
+		};
+		
+		
+		// Placeholders in formulieren
+		var isInputSupported = 'placeholder' in document.createElement('input');
+		var isTextareaSupported = 'placeholder' in document.createElement('textarea');
+		if (!isInputSupported || !isTextareaSupported) {
+			$('[placeholder]').focus(function () {
+				var input = $(this);
+				if (input.val() == input.attr('placeholder') && input.data('placeholder')) {
+					input.val('');
+					input.removeClass('placeholder');
+				}
+			}).blur(function () {
+				var input = $(this);
+				if (input.val() == '') {
+					input.addClass('placeholder');
+					input.val(input.attr('placeholder'));
+					input.data('placeholder', true);
+				} else {
+					input.data('placeholder', false);
+				}
+			}).blur().parents('form').submit(function () {
+				$(this).find('[placeholder]').each(function () {
+					var input = $(this);
+					if (input.val() == input.attr('placeholder') && input.data('placeholder')) {
+						input.val('');
+					}
+				})
+			});
+		}
+		
+	});
+</script>
+
+</body>
+</html>
